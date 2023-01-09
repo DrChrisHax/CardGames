@@ -1,7 +1,7 @@
 #Makefile Chris Manlove Jan 2023
 EXE = main
 CXX = @g++
-CXXFLAGS = -Wall -g -std=c++17 -O2
+CXXFLAGS = -Wall -g -std=c++20 -O2
 LINKERFLAGS = -lsfml-graphics -lsfml-window -lsfml-system
 
 $(EXE): $(OBJ) makefile
