@@ -4,7 +4,7 @@
 #include <vector>
 #include <iostream>
 
-Class Deck : public std::vector<Card>
+class Deck : public std::vector<Card>
 {
 public:
     enum State {Empty, Full};

@@ -63,7 +63,7 @@ Deck::Deck(Deck::State state) : std::vector<Card>() {
     this->emplace_back(Card::Diamond, 13, "assets/Cards/52.png");
 }
 
-Deck::Dec(const Deck& a) : std::vector<Card>(a) {
+Deck::Deck(const Deck& a) : std::vector<Card>(a) {
     *this = a;
 }
 
@@ -94,9 +94,15 @@ void Deck::shuffle() {
     *this = temp;
 }
 
-Deck& Deck::Operator=(const Deck &a) {
+Deck& Deck::operator=(const Deck &a) {
     this->clear();
     for(size_t i = 0; i < a.size(); i++)
         this->push_back(a[i]);
-    return this;
+    return *this;
+}
+
+std::ostream& operator<<(std::ostream &out, const Deck &a) {
+    for(size_t i = 0; i < a.size(); i++)
+        out << "Card : " << a[i].getSuit() << " | value : " << a[i].getValue() << "\n";
+    return out;
 }
