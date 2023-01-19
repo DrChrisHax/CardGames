@@ -15,7 +15,7 @@ public:
     void reset();
     void gameEvent();
     void draw();
-    void showLastCard();
+    void showLastCards();
     int start();
 
     void nextHand();
