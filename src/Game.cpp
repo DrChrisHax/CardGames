@@ -13,17 +13,17 @@ Game::Game() : mHand(Deck::Full), mPtr(nullptr), mSelector(0), mHandIndex(npos) 
     mWindow.setPosition(sf::Vector2i(desktop.width / 2 - mWindow.getSize().x/2, desktop.height/2 - mWindow.getSize().y/2));
 
     mBackground.setTexture("assets/background.jpeg");
-    mVoidCard.setTexture("assets/noCard.bpm");
-    mGoalPattern[0].setTexture("assets/noCard.bpm");
-    mGoalPattern[1].setTexture("assets/noCard.bpm");
-    mGoalPattern[2].setTexture("assets/noCard.bpm");
-    mGoalPattern[3].setTexture("assets/noCard.bpm");
-    mCardBack.setTexture("assets/Back/Card-Back-01.png");
-    mSelectorUp.setTexture("assets/selectorUp.bpm");
-    mSelectorDown.setTexture("assets/selectorDown.bpm");
-    //TODO
-    //refresh icon
-    //win
+    mVoidCard.setTexture("assets/noCard.bmp");
+    mGoalPattern[0].setTexture("assets/Cards/goalSpades.bmp");
+    mGoalPattern[1].setTexture("assets/Cards/goalHearts.bmp");
+    mGoalPattern[2].setTexture("assets/Cards/goalClubs.bmp");
+    mGoalPattern[3].setTexture("assets/Cards/goalDiamonds.bmp");
+    mCardBack.setTexture("assets/Cards/cardBack.bmp");
+    mSelectorUp.setTexture("assets/selectorUp.bmp");
+    mSelectorDown.setTexture("assets/selectorDown.bmp");
+    mRefreshIcon.setTexture("assets/refresh.bmp");
+
+    //win image needed
 
     this->reset();
 }
@@ -55,7 +55,7 @@ void Game::draw() {
 
     for(int i = 0; i < 4; i++) {
         mGoalPattern[i].setPosition(rectX, rectY);
-        mWindow.draw(mGoalPattern[i]);
+        mWindow.draw(mGoalPmPile[i][j].setPosition(rectX, rectY);attern[i]);
         mGoal[i][mGoal[i].size() - 1].setPosition(rectX, rectY);
         mWindow.draw(mGoal[i][mGoal[i].size() - 1]);
         rectX += 160; 
@@ -80,12 +80,12 @@ void Game::draw() {
         mVoidCard.setPosition(rectX, rectY);
         mWindow.draw(mVoidCard);
         for(size_t j = 0; j < mPile[i].size(); j++) {
-            if(mPile[i][j].getStatus()) {
+            if(mPile[i][j].getStatus()) {mPile[i][j].setPosition(rectX, rectY);
                 mPile[i][j].setPosition(rectX, rectY);
                 mWindow.draw(mPile[i][j]);
             }
             else {
-                mPile[i][j].setPosition(rectX, rectY);
+                mCardBack.setPosition(rectX, rectY);
                 mWindow.draw(mCardBack);
             }
             rectY += 40;
