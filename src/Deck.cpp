@@ -74,7 +74,6 @@ bool Deck::isInDeck(std::array<int, 52> deck, int num, int max) {
     return false;
 }
 
-//TODO Implement Fisher-Yates Shuffle
 void Deck::shuffle() {
     Deck temp;
     srand(time(NULL));

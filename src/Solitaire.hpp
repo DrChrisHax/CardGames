@@ -4,13 +4,13 @@
 #include "Tile.hpp"
 #include <array>
 
-class Game
+class Solitaire
 {
 public:
-    Game();
-    ~Game() = default;
-    Game(const Game&) = delete;
-    Game &operator=(const Game&) = delete;
+    Solitaire();
+    ~Solitaire() = default;
+    Solitaire(const Solitaire&) = delete;
+    Solitaire &operator=(const Solitaire&) = delete;
     static bool clickInRange(sf::Event::MouseButtonEvent event, sf::IntRect rect);
     void reset();
     void gameEvent();

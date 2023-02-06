@@ -1,4 +1,4 @@
-#include "Game.hpp"
+#include "Solitaire.hpp"
 #include <map>
 
 std::map<int, Card::Suit> goalPlacementMap = {
@@ -8,9 +8,9 @@ std::map<int, Card::Suit> goalPlacementMap = {
     {3, Card::Diamond}
 };
 
-//void Game::switchSound()
+//void Solitaire::switchSound()
 
-void Game::nextHand() {
+void Solitaire::nextHand() {
     if(mHandIndex == mHand.size() - 1) {
         mHandIndex = npos;
         return;
@@ -19,11 +19,11 @@ void Game::nextHand() {
     mPtr = nullptr;
 }
 
-void Game::selectHand() {
+void Solitaire::selectHand() {
     mPtr = (mPtr || mHand.empty() || mHandIndex == npos) ? nullptr : &mHand;
 }
 
-void Game::selectGoal(unsigned int pos) {
+void Solitaire::selectGoal(unsigned int pos) {
     if(!mPtr)
         return;
     if(mPtr == &mHand) {
@@ -50,7 +50,7 @@ void Game::selectGoal(unsigned int pos) {
     }
 }
 
-void Game::handToPile(unsigned int x, unsigned int y) {
+void Solitaire::handToPile(unsigned int x, unsigned int y) {
     if(mHand[mHandIndex].getValue() == mPile[x][y].getValue() - 1 && mHand[mHandIndex].getColor() != mPile[x][y].getColor()) {
         mPile[x].push_back(mHand[mHandIndex]);
         mHand.erase(mHand.begin() + mHandIndex);
@@ -65,7 +65,7 @@ void Game::handToPile(unsigned int x, unsigned int y) {
     }
 }
 
-void Game::pileToPile(unsigned int x, unsigned int y) {
+void Solitaire::pileToPile(unsigned int x, unsigned int y) {
     if(!mPile[x].empty() && mPile[x].size() - 1 != y)
         return;
     if(mPtr[0][mSelector].getValue() == mPile[x][y].getValue() - 1 && mPtr[0][mSelector].getColor() != mPile[x][y].getColor()) {
@@ -82,7 +82,7 @@ void Game::pileToPile(unsigned int x, unsigned int y) {
     }
 }
 
-void Game::action(unsigned int x, unsigned int y) {
+void Solitaire::action(unsigned int x, unsigned int y) {
     if(!mPtr) {
         mPtr = &mPile[x];
         mSelector = y;
@@ -96,7 +96,7 @@ void Game::action(unsigned int x, unsigned int y) {
     mSelector = 0;
 }
 
-bool Game::isCardValid(unsigned int x, size_t y) {
+bool Solitaire::isCardValid(unsigned int x, size_t y) {
     if(mPile[x].size() <= y && !mPtr)
         return false;
     if(mPile[x][y].getStatus())
@@ -104,7 +104,7 @@ bool Game::isCardValid(unsigned int x, size_t y) {
     return false;
 }
 
-void Game::selectPile(unsigned int pos, int y) {
+void Solitaire::selectPile(unsigned int pos, int y) {
     size_t card = 0;
     int i = 0;
 
@@ -133,7 +133,7 @@ void Game::selectPile(unsigned int pos, int y) {
     }
 }
 
-void Game::gameEvent() {
+void Solitaire::gameEvent() {
     sf::Event event;
     while(mWindow.pollEvent(event)) {
         if(event.type == sf::Event::Resized) {

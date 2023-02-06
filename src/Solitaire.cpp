@@ -1,6 +1,6 @@
-#include "Game.hpp"
+#include "Solitaire.hpp"
 
-Game::Game() : mHand(Deck::Full), mPtr(nullptr), mSelector(0), mHandIndex(npos) {
+Solitaire::Solitaire() : mHand(Deck::Full), mPtr(nullptr), mSelector(0), mHandIndex(npos) {
     mWindow.create(sf::VideoMode(1400, 900), "Solitaire");
     mWindow.setFramerateLimit(60);
     mWindow.setKeyRepeatEnabled(false);
@@ -28,7 +28,7 @@ Game::Game() : mHand(Deck::Full), mPtr(nullptr), mSelector(0), mHandIndex(npos) 
     this->reset();
 }
 
-int Game::start() {
+int Solitaire::start() {
     while(mWindow.isOpen()) {
         gameEvent();
         this->showLastCards();
@@ -39,7 +39,7 @@ int Game::start() {
     return 0;
 }
 
-bool Game::isGameWon() {
+bool Solitaire::isGameWon() {
     for(int i = 0; i < 4; i++) {
         if(mGoal[i][mGoal[i].size() - 1].getValue() != 13)
             return false;
@@ -47,7 +47,7 @@ bool Game::isGameWon() {
     return true;
 }
 
-void Game::draw() {
+void Solitaire::draw() {
     float rectX = 50.0f;
     float rectY = 50.0f;
 
@@ -55,7 +55,7 @@ void Game::draw() {
 
     for(int i = 0; i < 4; i++) {
         mGoalPattern[i].setPosition(rectX, rectY);
-        mWindow.draw(mGoalPmPile[i][j].setPosition(rectX, rectY);attern[i]);
+        mWindow.draw(mGoalPattern[i]);
         mGoal[i][mGoal[i].size() - 1].setPosition(rectX, rectY);
         mWindow.draw(mGoal[i][mGoal[i].size() - 1]);
         rectX += 160; 
@@ -80,7 +80,7 @@ void Game::draw() {
         mVoidCard.setPosition(rectX, rectY);
         mWindow.draw(mVoidCard);
         for(size_t j = 0; j < mPile[i].size(); j++) {
-            if(mPile[i][j].getStatus()) {mPile[i][j].setPosition(rectX, rectY);
+            if(mPile[i][j].getStatus()) {
                 mPile[i][j].setPosition(rectX, rectY);
                 mWindow.draw(mPile[i][j]);
             }
@@ -128,7 +128,7 @@ void Game::draw() {
     mWindow.draw(mRefreshIcon);
 }
 
-void Game::reset() {
+void Solitaire::reset() {
     mPtr = nullptr;
     mSelector = 0;
     mHandIndex = npos;
@@ -159,11 +159,11 @@ void Game::reset() {
     mGoal[3].emplace_back(Card::Diamond, 0, "assets/noCard.bmp");
 }
 
-bool Game::clickInRange(sf::Event::MouseButtonEvent event, sf::IntRect rect) {
+bool Solitaire::clickInRange(sf::Event::MouseButtonEvent event, sf::IntRect rect) {
     return rect.contains(event.x, event.y);
 }
 
-void Game::showLastCards() {
+void Solitaire::showLastCards() {
     for(auto &deck : mPile) {
         if(!deck.empty()) {
             deck[deck.size() - 1].setStatus(true);
